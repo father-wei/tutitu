@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="IdProvider" IDEtalkID="04BD240FE0A35C08070EC0FD2FCB323E" />
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JSX" />
   </component>
@@ -13,7 +14,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="true" assert-keyword="false" jdk-15="false" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" assert-keyword="false" jdk-15="false" />
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
@@ -31,3 +32,4 @@
     </states>
   </component>
 </project>
+
