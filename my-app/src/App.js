@@ -1,86 +1,65 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { firebaseDb } from './core/firebase';
+import React from 'react'
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
+import { authService } from './core/auth'
+import  LoginPage  from  './pages/login';
+import  ProviderPage  from  './pages/provider';
+import  ManagerPage  from  './pages/manager';
 
-var TodoList2 = React.createClass({
-    render: function() {
-        var _this = this;
-        var createItem = function(item, index) {
-            return (
-                <li key={ index }>
-          { item.text }
-                    <span onClick={ _this.props.removeItem.bind(null, item['.key']) }
-                    style={{ color: 'red', marginLeft: '10px', cursor: 'pointer' }}>
-                    X
-                    </span>
-                </li>
-                );
-        };
-        return <ul>{ this.props.items.map(createItem) }</ul>;
+const Nav = () => (
+    <div>
+        <Link to='/logout'>{authService.loggedIn()? "Logout" : ""}</Link>&nbsp;
+    </div>
+)
+
+
+const Container = (props) => <div>
+    <Nav />
+    {props.children}
+</div>
+
+
+
+
+
+const  requireAuth = (nextState, replace) =>{
+    if (!authService.loggedIn()) {
+        replace({
+            pathname: '/login'
+        })
     }
-});
+}
 
-var App = React.createClass({
-    getInitialState: function() {
+const logout = (nextState, replace) => {
+    if(authService.loggedIn()){
+        authService.logout();
+        replace({
+            pathname: '/login'
+        })
+    }
+}
+
+
+const App = React.createClass({
+
+    getInitialState() {
         return {
-            items: [],
-            text: ''
-        };
-    },
-
-    componentWillMount: function() {
-        this.firebaseRef = firebaseDb.ref('todoApp/items');
-        this.firebaseRef.limitToLast(25).on('value', function(dataSnapshot) {
-            var items = [];
-            dataSnapshot.forEach(function(childSnapshot) {
-                var item = childSnapshot.val();
-                item['.key'] = childSnapshot.key;
-                items.push(item);
-            }.bind(this));
-
-            this.setState({
-                items: items
-            });
-        }.bind(this));
-    },
-
-    componentWillUnmount: function() {
-        this.firebaseRef.off();
-    },
-
-    onChange: function(e) {
-        this.setState({text: e.target.value});
-    },
-
-    removeItem: function(key) {
-        var firebaseRef = firebaseDb.ref('todoApp/items');;
-        firebaseRef.child(key).remove();
-    },
-
-    handleSubmit: function(e) {
-        e.preventDefault();
-        if (this.state.text && this.state.text.trim().length !== 0) {
-            this.firebaseRef.push({
-                text: this.state.text
-            });
-            this.setState({
-                text: ''
-            });
+            loggedIn: authService.loggedIn()
         }
     },
 
-    render: function() {
+    render () {
         return (
-            <div>
-                <TodoList2 items={ this.state.items } removeItem={ this.removeItem } />
-                <form onSubmit={ this.handleSubmit }>
-                    <input onChange={ this.onChange } value={ this.state.text } />
-                    <button>{ 'Add #' + (this.state.items.length + 1) }</button>
-                </form>
-            </div>
-            );
+            <Router history={hashHistory}>
+                <Route path='/' component={Container}>
+                    <IndexRoute  component={LoginPage} />
+                    <Route path='/login' component={LoginPage} />
+                    <Route path='/provider' component={ProviderPage}  onEnter={requireAuth} />
+                    <Route path='/manager' component={ManagerPage}  onEnter={requireAuth} />
+                    <Route path='/logout' component={LoginPage}  onEnter={logout}/>
+                </Route>
+            </Router>
+        )
     }
-});
+})
 
-export default App;
+export default App

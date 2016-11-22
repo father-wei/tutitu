@@ -1,7 +1,10 @@
 import React from 'react';
 import { firebaseDb } from '../../core/firebase';
+import { authService } from '../../core/auth';
 
-var LoginPage = React.createClass({
+import { withRouter } from 'react-router'
+
+var LoginPage = withRouter(React.createClass({
 
     getInitialState: function() {
         return {
@@ -28,20 +31,16 @@ var LoginPage = React.createClass({
 
     handleSubmit: function(e) {
         e.preventDefault();
-        var that = this;
-        if (this.state.username && this.state.username.trim().length !== 0
-            &&  this.state.password && this.state.password.trim().length !== 0) {
-
-            this.firebaseRef.orderByChild("username").equalTo(this.state.username).on("child_added", (snapshot) =>{
-
-                if(snapshot.val().password == this.state.password){
-                    alert("pass!")
-                }else{
-                    alert("no!")
+        authService.login(this.state.username, this.state.password, this.firebaseRef,  (loggedIn, role) => {
+            if(loggedIn) {
+                if(role === 'manager') {
+                    this.props.router.push('/manager')
+                }else if (role === 'provider') {
+                    this.props.router.push('/provider')
                 }
 
-            });
-        }
+            }
+        });
     },
 
     render: function() {
@@ -55,6 +54,6 @@ var LoginPage = React.createClass({
             </div>
             );
     }
-});
+}));
 
 export default LoginPage;

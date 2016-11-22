@@ -7,6 +7,6 @@ import Login from './pages/login'
 
 
 ReactDOM.render(
-  <Login />,
+  <App />,
   document.getElementById('root')
 );
