@@ -8,10 +8,13 @@ var ProviderPage =React.createClass({
     render: () => {
         return (
             <div>
-                <h1>Hello Provider</h1>
                 <LoggingService />
-                <ServiceList />
-                <MemberList />
+                <div className="row">
+                    <div className="col-md-6"><ServiceList /></div>
+                    <div className="col-md-6"><MemberList /></div>
+                </div>
+
+
             </div>
         )
     }

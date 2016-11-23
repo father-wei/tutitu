@@ -51,7 +51,7 @@ var LoginPage = withRouter(React.createClass({
             <div className="row">
                 <form onSubmit={ this.handleSubmit } className="col-md-6 col-md-offset-3 form-horizontal">
                     <div className="form-group">
-                        <label htmlFor="inputUserId" className="col-lg-2 control-label">User Id : </label>
+                        <label htmlFor="inputUserId" className="col-lg-2 control-label">User Id</label>
                         <div className="col-lg-10">
                              <input onChange={ this.onUsernameChange } value={ this.state.username } type="text" className="form-control" id="inputUserId" placeholder="User Id" />
                         </div>

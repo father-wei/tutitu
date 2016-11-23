@@ -9,6 +9,11 @@ var Nav =React.createClass({
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
+                        <a className="navbar-brand" >{localStorage.role === "provider"? "Provider: " : "Manager: "}</a>
+
+                    </div>
+
+                    <div className="navbar-header">
 
                         <a className="navbar-brand" href="#">Home</a>
                     </div>

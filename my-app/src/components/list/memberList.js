@@ -10,18 +10,20 @@ var MemberList = React.createClass({
     },
 
     componentWillMount: function() {
-        members.on('value', function(dataSnapshot) {
-            var members = [];
-            dataSnapshot.forEach(function(childSnapshot) {
-                var item = childSnapshot.val();
-                item['.key'] = childSnapshot.key;
-                members.push(item);
-            }.bind(this));
 
+        var items = [];
+        members.orderByChild("providerId")
+            .equalTo(localStorage.token)
+            .on("child_added", (snapshot) => {
+            var item = snapshot.val();
+            item['.key'] = snapshot.key;
+            items.push(item);
             this.setState({
-                members: members
+                members: items
             });
-        }.bind(this));
+
+        }).bind(this);
+
     },
 
     componentWillUnmount: function() {

@@ -7,13 +7,31 @@ var List = React.createClass({
 
         var createItem = function(item, index) {
             return (
-                <li key={ index}>
-                    id: { item.code } name: { item.name }
-                </li>
+                <tr key={ index} className="active">
+
+                    <td>{ item.code }</td>
+                    <td>{ item.name }</td>
+                    <td>{ item.description}</td>
+                </tr>
+
             );
         };
-        return <ul>{ this.props.items.map(createItem) }</ul>;
+        return (<table className="table table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Id (Code)</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { this.props.items.map(createItem) }
+                    </tbody>
+                </table>)
     }
 });
 
 export default List
+
+
+
