@@ -17,7 +17,7 @@ const Container = (props) => <div>
     <h2>ChocAn</h2>
     {authService.loggedIn()? <Nav /> : <div/>}
 
-    <div className="jumbotron">
+    <div >
         {props.children}
     </div>
 </div>

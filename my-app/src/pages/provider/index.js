@@ -9,11 +9,12 @@ var ProviderPage =React.createClass({
         return (
             <div>
                 <LoggingService />
-                <div className="row">
-                    <div className="col-md-6"><ServiceList /></div>
-                    <div className="col-md-6"><MemberList /></div>
+                <div className="well">
+                    <div className="row">
+                        <div className="col-md-6"><ServiceList /></div>
+                        <div className="col-md-6"><MemberList /></div>
+                    </div>
                 </div>
-
 
             </div>
         )

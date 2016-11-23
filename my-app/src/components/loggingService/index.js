@@ -61,14 +61,46 @@ var LoggingService = React.createClass({
     render: function() {
 
         return (
-            <div>
+            <div className="well">
                 <form onSubmit={ this.handleSubmit }>
-                    <h2>Logging Service</h2>
-                    Service ID: <input onChange={ this.onServiceIdChange } value={ this.state.serviceIdText } />
-                    Member  ID: <input onChange={ this.onMemberIdChange } value={ this.state.memberIdText } />
-                    <button > ADD </button>
+                    <h2>Logging Service <button className="btn btn-default" type="button">Add Service</button></h2>
+                    <div className="row">
+                    <div className="col-md-4">
+                        <div className="form-group">
+                            <label className="control-label">SERVICE CODE</label>
+                            <div className="input-group">
+                                <input type="text" className="form-control" onChange={ this.onServiceIdChange } value={ this.state.serviceIdText } />
+                                    <span className="input-group-btn">
+                                        <button className="btn btn-default" type="button">Search</button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-4">
+                        <div className="form-group">
+                            <label className="control-label">MEMBER CODE</label>
+                            <div className="input-group">
+                                <input type="text" className="form-control" onChange={ this.onMemberIdChange } value={ this.state.memberIdText } />
+                                <span className="input-group-btn">
+                                    <button className="btn btn-default" type="button">Search</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="form-group">
+                            <label className="control-label">Pick A Date</label>
+                            <input className="form-control"  type="date"/>
+                        </div>
+                    </div>
+
+                    </div>
+
+
+
                 </form>
-                <List items={ this.state.loggingServices } />
+
 
             </div>
          )
@@ -77,3 +109,7 @@ var LoggingService = React.createClass({
 });
 
 export default LoggingService
+
+/*
+* <List items={ this.state.loggingServices } />
+* */
