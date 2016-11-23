@@ -4,17 +4,22 @@ import { authService } from './core/auth'
 import  LoginPage  from  './pages/login';
 import  ProviderPage  from  './pages/provider';
 import  ManagerPage  from  './pages/manager';
+import Nav from './components/nav'
 
-const Nav = () => (
+/*const Nav = () => (
     <div>
         <Link to='/logout'>{authService.loggedIn()? "Logout" : ""}</Link>&nbsp;
     </div>
-)
+)*/
 
 
 const Container = (props) => <div>
-    <Nav />
-    {props.children}
+    <h2>ChocAn</h2>
+    {authService.loggedIn()? <Nav /> : <div/>}
+
+    <div className="jumbotron">
+        {props.children}
+    </div>
 </div>
 
 

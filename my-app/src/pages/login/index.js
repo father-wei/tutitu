@@ -48,11 +48,27 @@ var LoginPage = withRouter(React.createClass({
 
     render: function() {
         return (
-            <div>
-                <form onSubmit={ this.handleSubmit }>
-                    Username: <input onChange={ this.onUsernameChange } value={ this.state.username } />
-                    Password: <input onChange={ this.onPasswordChange } value={ this.state.password } />
-                    <button>Login</button>
+            <div className="row">
+                <form onSubmit={ this.handleSubmit } className="col-md-6 col-md-offset-3 form-horizontal">
+                    <div className="form-group">
+                        <label htmlFor="inputUserId" className="col-lg-2 control-label">User Id : </label>
+                        <div className="col-lg-10">
+                             <input onChange={ this.onUsernameChange } value={ this.state.username } type="text" className="form-control" id="inputUserId" placeholder="User Id" />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="inputPassword" className="col-lg-2 control-label">Password</label>
+                        <div className="col-lg-10">
+                            <input onChange={ this.onPasswordChange } value={ this.state.password } type="password" className="form-control" id="inputPassword" placeholder="Password" />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="col-lg-10 col-lg-offset-2">
+                            <button type="reset" className="btn btn-default">Cancel</button>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
             );
