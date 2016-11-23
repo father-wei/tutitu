@@ -7,6 +7,7 @@ export const authService = {
             firebaseRef.orderByChild("username").equalTo(username).on("child_added", (snapshot) =>{
                 if( snapshot.val().password + ""  === password + "" ){
                     localStorage.token = snapshot.key;
+                    localStorage.role = snapshot.val().role;
                      cb(true, snapshot.val().role);
                 }else{
                      cb(false);
@@ -18,6 +19,7 @@ export const authService = {
 
     logout() {
         delete localStorage.token
+        delete localStorage.role
     },
 
     loggedIn(){

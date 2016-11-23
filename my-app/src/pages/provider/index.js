@@ -1,10 +1,13 @@
 import React from 'react'
-
+import  ServiceListContainer  from '../../components/serviceListModal/serviceListContainer'
 
 var ProviderPage =React.createClass({
     render: () => {
         return (
-            <h1>Hello Provider</h1>
+            <div>
+                <h1>Hello Provider</h1>
+                <ServiceListContainer />
+            </div>
         )
     }
 })

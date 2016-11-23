@@ -51,7 +51,7 @@ const App = React.createClass({
         return (
             <Router history={hashHistory}>
                 <Route path='/' component={Container}>
-                    <IndexRoute  component={LoginPage} />
+                    <IndexRoute  component={LoginPage}/>
                     <Route path='/login' component={LoginPage} />
                     <Route path='/provider' component={ProviderPage}  onEnter={requireAuth} />
                     <Route path='/manager' component={ManagerPage}  onEnter={requireAuth} />

@@ -7,6 +7,9 @@ import { withRouter } from 'react-router'
 var LoginPage = withRouter(React.createClass({
 
     getInitialState: function() {
+        if(authService.loggedIn()){
+            this.props.router.push('/' + localStorage.role)
+        }
         return {
             username: '',
             password: ''
