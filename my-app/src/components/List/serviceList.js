@@ -33,7 +33,7 @@ var ServiceList = React.createClass({
         return (
             <div>
                 <h2>SERVICES</h2>
-                <List items={ this.state.services } />
+                <List items={ this.state.services }  component="service"/>
             </div>
          )
 

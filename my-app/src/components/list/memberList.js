@@ -35,7 +35,7 @@ var MemberList = React.createClass({
         return (
             <div>
                 <h2>MEMBERS</h2>
-                <List items={ this.state.members } />
+                <List items={ this.state.members}  component="members" />
             </div>
          )
 
