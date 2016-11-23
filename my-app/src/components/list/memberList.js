@@ -1,40 +1,43 @@
 import React from 'react';
-import { services } from '../../core/domain/services'
-import ServiceList from './serviceList'
+import { members } from '../../core/domain/members'
+import List from './list'
 
-var ServiceListContainer = React.createClass({
+var MemberList = React.createClass({
     getInitialState: function() {
         return {
-            services: []
+            members: []
         }
     },
 
     componentWillMount: function() {
-        services.on('value', function(dataSnapshot) {
-            var services = [];
+        members.on('value', function(dataSnapshot) {
+            var members = [];
             dataSnapshot.forEach(function(childSnapshot) {
                 var item = childSnapshot.val();
                 item['.key'] = childSnapshot.key;
-                services.push(item);
+                members.push(item);
             }.bind(this));
 
             this.setState({
-                services: services
+                members: members
             });
         }.bind(this));
     },
 
     componentWillUnmount: function() {
-        services.off();
+        members.off();
     },
 
     render: function() {
-        var _this = this;
+
         return (
-            <ServiceList items={ _this.state.services } />
+            <div>
+                <h2>MEMBERS</h2>
+                <List items={ this.state.members } />
+            </div>
          )
 
     }
 });
 
-export default ServiceListContainer
+export default MemberList

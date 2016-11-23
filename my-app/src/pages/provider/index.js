@@ -1,12 +1,17 @@
 import React from 'react'
-import  ServiceListContainer  from '../../components/serviceListModal/serviceListContainer'
+import  ServiceList  from '../../components/list/serviceList'
+import  MemberList  from '../../components/list/memberList'
+import  LoggingService  from '../../components/loggingService'
+
 
 var ProviderPage =React.createClass({
     render: () => {
         return (
             <div>
                 <h1>Hello Provider</h1>
-                <ServiceListContainer />
+                <LoggingService />
+                <ServiceList />
+                <MemberList />
             </div>
         )
     }

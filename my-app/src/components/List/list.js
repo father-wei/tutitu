@@ -1,14 +1,14 @@
 import React from 'react';
 
 
-var ServiceList = React.createClass({
+var List = React.createClass({
 
     render: function(){
 
         var createItem = function(item, index) {
             return (
                 <li key={ index}>
-                    { item.name }
+                    id: { item.code } name: { item.name }
                 </li>
             );
         };
@@ -16,4 +16,4 @@ var ServiceList = React.createClass({
     }
 });
 
-export default ServiceList
+export default List
