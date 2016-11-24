@@ -9,19 +9,8 @@ var Nav =React.createClass({
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand" >{localStorage.role === "provider"? "Provider: " : "Manager: "}</a>
-
+                        <a className="navbar-brand" >{localStorage.role === "provider"? "Provider: " : "Manager: "}  {localStorage.token}</a>
                     </div>
-
-                    <div className="navbar-header">
-
-                        <a className="navbar-brand" href="#">Home</a>
-                    </div>
-
-                    <div className="navbar-header">
-                        <a className="navbar-brand" href="#">Report</a>
-                    </div>
-
 
                      <ul className="nav navbar-nav navbar-right">
                             <li>

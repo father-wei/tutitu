@@ -35,6 +35,7 @@ var LoginPage = withRouter(React.createClass({
     handleSubmit: function(e) {
         e.preventDefault();
         authService.login(this.state.username, this.state.password, this.firebaseRef,  (loggedIn, role) => {
+            
             if(loggedIn) {
                 if(role === 'manager') {
                     this.props.router.push('/manager')
