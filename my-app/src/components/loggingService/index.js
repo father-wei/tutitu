@@ -17,7 +17,8 @@ var LoggingService = React.createClass({
             serviceValidate: false,
             memberValidate: false,
             serviceIdInputTarget: null,
-            memberIdTarget: null
+            memberIdTarget: null,
+            showLoggingTable: false
 
         }
     },
@@ -29,10 +30,28 @@ var LoggingService = React.createClass({
             .on("child_added", (snapshot) => {
                    var item = snapshot.val();
                    item['.key'] = snapshot.key;
-                   items.push(item);
-                   this.setState({
-                       loggingServices: items
+
+                   services.orderByChild("code")
+                        .equalTo(item.serviceId)
+                        .on("value", (childsnapshot) => {
+                            item.price =  Object.values(childsnapshot.val())[0].price;
+                            item.serviceName =  Object.values(childsnapshot.val())[0].name;
+                            if( new Date().getTime() - new Date(item.date).getTime() < 86400000 * 7 ){
+                                items.push(item);
+                                this.setState({
+                                    loggingServices: items
+                                });
+
+                                items.sort(function(a, b){
+                                    if(a.serviceName < b.serviceName) return -1;
+                                    if(a.serviceName > b.serviceName) return 1;
+                                    return 0;
+                                })
+                            }
                     });
+
+
+
 
             }).bind(this);
 
@@ -169,7 +188,13 @@ var LoggingService = React.createClass({
         }
     },
 
-
+    handleReportClick: function(e){
+        if(this.state.showLoggingTable === true){
+            this.setState({showLoggingTable : false})
+        }else {
+            this.setState({showLoggingTable : true})
+        }
+    },
 
 
     render: function() {
@@ -184,7 +209,7 @@ var LoggingService = React.createClass({
                             <div className="input-group">
                                 <input type="text" className="form-control" onChange={ this.onServiceIdChange } value={ this.state.serviceIdText } />
                                     <span className="input-group-btn">
-                                        <Modal component="">
+                                        <Modal component="Search">
                                             {this.state.serviceModalMessage}
                                         </Modal>
                                     </span>
@@ -198,34 +223,44 @@ var LoggingService = React.createClass({
                             <div className="input-group">
                                 <input type="text" className="form-control" onChange={ this.onMemberIdChange } value={ this.state.memberIdText } />
                                 <span className="input-group-btn">
-                                    <Modal component="">
+                                    <Modal component="Search">
                                         {this.state.memberModalMessage}
                                     </Modal>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <div className="form-group">
                             <label className="control-label">Pick A Date</label>
                             <input className="form-control"  type="date" onChange={ this.onDateChange } value={this.state.dateText}/>
                         </div>
                     </div>
-                        <div className="col-md-2">
+                        <div className="col-md-1">
                             <div className="form-group">
                                 <label className="control-label">Log </label>
-                                <Modal component="addService" cb={this.addServiceSuccessCB}>
+                                <Modal component="Log" cb={this.addServiceSuccessCB}>
                                  {(this.state.serviceValidate && this.state.memberValidate && this.state.dateText)?  <h1 className="alert alert-dismissible alert-success" >Saved Successfully</h1> : <h1 className="alert alert-dismissible alert-danger">Data is invalid, unable to save, please double check</h1> }
-
 
                                 </Modal>
                             </div>
                         </div>
 
+                        <div className="col-md-2">
+                            <div className="form-group">
+                                <label className="control-label">Report </label>
+                                <div><button onClick={this.handleReportClick} className="btn btn-default" type="button">{this.state.showLoggingTable? "Hide" : "Show" }</button></div>
+                            </div>
+                        </div>
+
+
+
+
+
                     </div>
+                    { this.state.showLoggingTable ? <List items={ this.state.loggingServices } />  : null }
             </div>
          )
-
     }
 });
 

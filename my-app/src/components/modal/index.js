@@ -10,7 +10,7 @@ var Modal =React.createClass({
     },
     handleClick : function(){
         this.setState({isShowingModal: true})
-        if(this.props.component === "addService"){
+        if(this.props.component === "Log"){
             this.props.cb();
         }
 
@@ -19,7 +19,7 @@ var Modal =React.createClass({
 
     render: function() {
         return <div onClick={this.handleClick}>
-            <button className="btn btn-default" type="button">{this.props.component === "addService"? 'Log Service' : 'Search'}</button>
+            <button className="btn btn-default" type="button">{this.props.component}</button>
           {
               this.state.isShowingModal &&
               <ModalContainer onClose={this.handleClose}>
