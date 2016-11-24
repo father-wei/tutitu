@@ -139,7 +139,8 @@ var LoggingService = React.createClass({
         members.orderByChild("code")
             .equalTo( e.target.value)
             .on("value", (snapshot) => {
-            if(snapshot.val()){
+
+            if(snapshot.val()  &&  Object.values(snapshot.val())[0].providerId === localStorage.token){
                 this.setState({memberValidate: true});
                 var memberObj = Object.values(snapshot.val())[0];
                 this.setState({
