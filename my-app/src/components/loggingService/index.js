@@ -58,6 +58,18 @@ var LoggingService = React.createClass({
     },
 
     handleSubmit: function() {
+        if(!this.state.serviceIdText ){
+            this.setState({
+                serviceValidate: false
+            });
+
+        }
+        if (! this.state.memberIdText) {
+            this.setState({
+                memberValidate: false
+            });
+        }
+
         loggingServices.push({
             memberId:  this.state.memberIdText,
             serviceId: this.state.serviceIdText,
@@ -184,7 +196,7 @@ var LoggingService = React.createClass({
            this.state.serviceIdInputTarget.classList.remove("alert", "alert-dismissible","alert-success");
            this.state.memberIdTarget.classList.remove("alert", "alert-dismissible","alert-success");
 
-        
+
 
         }
     },
