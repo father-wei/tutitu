@@ -8,7 +8,13 @@ var Modal =React.createClass({
             isShowingModal: false
         }
     },
-    handleClick : function(){ this.setState({isShowingModal: true})},
+    handleClick : function(){
+        this.setState({isShowingModal: true})
+        if(this.props.component === "addService"){
+            this.props.cb();
+        }
+
+    },
     handleClose : function(){ this.setState({isShowingModal: false})},
 
     render: function() {

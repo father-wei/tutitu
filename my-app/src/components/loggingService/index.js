@@ -15,7 +15,9 @@ var LoggingService = React.createClass({
             serviceModalMessage: <h1>The service search result is not found</h1>,
             memberModalMessage: <h1>The member search result is not found</h1>,
             serviceValidate: false,
-            memberValidate: false
+            memberValidate: false,
+            serviceIdInputTarget: null,
+            memberIdTarget: null
 
         }
     },
@@ -36,22 +38,13 @@ var LoggingService = React.createClass({
 
     },
 
-    handleSubmit: function(e) {
-        e.preventDefault();
-        if ( this.state.serviceIdText && this.state.serviceIdText.trim().length !== 0 &&
-             this.state.memberIdText && this.state.memberIdText.trim().length !== 0
-           )
-        {
-            loggingServices.push({
-                memberId:  this.state.memberIdText,
-                serviceId: this.state.serviceIdText,
-                providerId: localStorage.token
-            });
-            this.setState({
-                memberId:  '',
-                serviceId: ''
-            });
-        }
+    handleSubmit: function() {
+        loggingServices.push({
+            memberId:  this.state.memberIdText,
+            serviceId: this.state.serviceIdText,
+            providerId: localStorage.token,
+            date: this.state.dateText
+        });
     },
 
     componentWillUnmount: function() {
@@ -59,7 +52,7 @@ var LoggingService = React.createClass({
     },
 
     onServiceIdChange: function(e) {
-        this.setState({serviceIdText: e.target.value});
+        this.setState({serviceIdText: e.target.value, serviceIdInputTarget: e.target});
         services.orderByChild("code")
             .equalTo( e.target.value)
             .on("value", (snapshot) => {
@@ -100,7 +93,8 @@ var LoggingService = React.createClass({
                     this.setState({serviceModalMessage: <h1>The service search result is not found</h1>})
                     e.target.classList.remove("alert", "alert-dismissible","alert-success");
                     e.target.classList.add("alert", "alert-dismissible", "alert-danger");
-                    this.setState({serviceValidate: false});
+
+                    this.setState({serviceValidate: false });
                  }
 
         }).bind(this);
@@ -108,7 +102,7 @@ var LoggingService = React.createClass({
 
     onMemberIdChange: function(e) {
         var target = e.target;
-        this.setState({memberIdText: e.target.value});
+        this.setState({memberIdText: e.target.value,  memberIdTarget: target});
 
         members.orderByChild("code")
             .equalTo( e.target.value)
@@ -142,6 +136,7 @@ var LoggingService = React.createClass({
 
                 target.classList.remove("alert", "alert-dismissible", "alert-danger");
                 target.classList.add("alert", "alert-dismissible", "alert-success");
+
             }
             else {
                 this.setState({memberModalMessage: <h1>The member search result is not found</h1>})
@@ -156,6 +151,26 @@ var LoggingService = React.createClass({
         this.setState({dateText: e.target.value});
 
     },
+
+    addServiceSuccessCB: function(){
+        if(this.state.serviceValidate && this.state.memberValidate && this.state.dateText){
+
+            this.handleSubmit()
+            this.setState({
+               serviceIdText: '',
+               memberIdText: ''
+
+           });
+
+           this.state.serviceIdInputTarget.classList.remove("alert", "alert-dismissible","alert-success");
+           this.state.memberIdTarget.classList.remove("alert", "alert-dismissible","alert-success");
+
+
+        }
+    },
+
+
+
 
     render: function() {
 
@@ -193,14 +208,16 @@ var LoggingService = React.createClass({
                     <div className="col-md-4">
                         <div className="form-group">
                             <label className="control-label">Pick A Date</label>
-                            <input className="form-control"  type="date" onChange={ this.onDateChange }/>
+                            <input className="form-control"  type="date" onChange={ this.onDateChange } value={this.state.dateText}/>
                         </div>
                     </div>
                         <div className="col-md-2">
                             <div className="form-group">
                                 <label className="control-label">Log </label>
-                                <Modal component="addService">
-                                 {(this.state.serviceValidate && this.state.memberValidate && this.state.dateText)? <h1 className="alert alert-dismissible alert-success" >Saved Successfully</h1> : <h1 className="alert alert-dismissible alert-danger">Data is invalid, unable to save, please double check</h1>}
+                                <Modal component="addService" cb={this.addServiceSuccessCB}>
+                                 {(this.state.serviceValidate && this.state.memberValidate && this.state.dateText)?  <h1 className="alert alert-dismissible alert-success" >Saved Successfully</h1> : <h1 className="alert alert-dismissible alert-danger">Data is invalid, unable to save, please double check</h1> }
+
+
                                 </Modal>
                             </div>
                         </div>
@@ -214,6 +231,3 @@ var LoggingService = React.createClass({
 
 export default LoggingService
 
-/*
-* <List items={ this.state.loggingServices } />
-* */
