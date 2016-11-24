@@ -184,10 +184,7 @@ var LoggingService = React.createClass({
            this.state.serviceIdInputTarget.classList.remove("alert", "alert-dismissible","alert-success");
            this.state.memberIdTarget.classList.remove("alert", "alert-dismissible","alert-success");
 
-            this.setState(
-                {serviceValidate: false,
-                memberValidate: false,});
-
+        
 
         }
     },

@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6824b62b-94f9-4a05-9b11-04266b1d5e96" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/components/loggingService/index.js" afterPath="$PROJECT_DIR$/my-app/src/components/loggingService/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my-app/src/pages/login/index.js" afterPath="$PROJECT_DIR$/my-app/src/pages/login/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="create-react-app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,8 +79,8 @@
       <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/my-app/src/components/loggingService/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6835443" vertical-offset="2481" max-vertical-offset="4170">
-              <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.39873418" vertical-offset="2601" max-vertical-offset="4125">
+              <caret line="186" column="8" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -845,12 +843,12 @@
       <workItem from="1479765691283" duration="5565000" />
       <workItem from="1479789259295" duration="11705000" />
       <workItem from="1479835262908" duration="14340000" />
-      <workItem from="1479868734938" duration="44220000" />
+      <workItem from="1479868734938" duration="44363000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75830000" />
+    <option name="totallyTimeSpent" value="75973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="805" extended-state="6" />
@@ -1284,8 +1282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/components/loggingService/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6835443" vertical-offset="2481" max-vertical-offset="4170">
-          <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.39873418" vertical-offset="2601" max-vertical-offset="4125">
+          <caret line="186" column="8" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
           <folding />
         </state>
       </provider>
