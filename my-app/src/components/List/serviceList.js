@@ -16,7 +16,7 @@ var ServiceList = React.createClass({
                 var item = childSnapshot.val();
                 item['.key'] = childSnapshot.key;
                 services.push(item);
-            }.bind(this));
+            })
 
             this.setState({
                 services: services

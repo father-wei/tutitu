@@ -10,36 +10,39 @@ var List = React.createClass({
         }
     },
     componentWillMount: function() {
+
         var sum = this.props.items
             .map(item => item.price)
             .reduce(function(a, b) {
-                return a + b
-            }, 0);
+            return a + b
+        }, 0);
 
         this.setState({sum: sum});
+    },
 
 
+    createItem : function(item, index) {
 
+        return (
+
+            <tr key={ index} className="active">
+
+                <td>{ item.memberId }</td>
+                <td>{ item.serviceId }</td>
+                <td>{ item.serviceName }</td>
+                <td>{ item.providerId }</td>
+                <td>{ item.date }</td>
+                <td> $ { item.price }</td>
+            </tr>
+
+
+            );
     },
 
     render: function(){
 
-        var createItem = function(item, index) {
-            return (
-
-                <tr key={ index} className="active">
-
-                    <td>{ item.memberId }</td>
-                    <td>{ item.serviceId }</td>
-                    <td>{ item.serviceName }</td>
-                    <td>{ item.providerId }</td>
-                    <td>{ item.date }</td>
-                    <td>{ item.price }</td>
-                </tr>
 
 
-            );
-        };
         return <table className="table table-striped table-hover ">
             <thead>
                 <tr>
@@ -49,11 +52,11 @@ var List = React.createClass({
                     <th>Provider ID (CODE)</th>
                     <th>Date</th>
                     <th>Price</th>
-                    <th>Total: $ {this.state.sum}</th>
+                    <th>Total: $ {this.state.sum ? this.state.sum : this.props.sum }</th>
                 </tr>
             </thead>
             <tbody>
-                   { this.props.items.map(createItem) }
+                   { this.props.items.map(this.createItem) }
             </tbody>
         </table>
     }

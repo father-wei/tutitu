@@ -4,7 +4,6 @@ import App from './App';
 import './index.css';
 
 
-import Login from './pages/login'
 
 
 

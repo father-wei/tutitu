@@ -10,8 +10,9 @@ var List = React.createClass({
                 <td>{ item.code }</td>
                 <td>{ item.name }</td>
 
-                {this.props.component === "members"?  <td>{ item.status}</td> :  <td>{ item.description}</td>}
-                {this.props.component === "service"?  <td> $ { item.price}</td> :  null}
+                {this.props.component === "members"?  <td>{ item.status }</td> :  <td>{ item.description}</td>}
+                {this.props.component === "service"?  <td> $ { item.price }</td> :  null}
+                {localStorage.role ==="manager"? <td>  { item.providerId }</td> :  null}
             </tr>
 
             );
@@ -28,6 +29,7 @@ var List = React.createClass({
 
                             { this.props.component === "members"? <th>Status</th> :  <th>Description</th>}
                             { this.props.component === "service"? <th>Price</th> :  null}
+                            {localStorage.role ==="manager"? <th>Provider Id</th> :  null}
                         </tr>
                     </thead>
                     <tbody>

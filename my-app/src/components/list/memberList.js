@@ -10,19 +10,40 @@ var MemberList = React.createClass({
     },
 
     componentWillMount: function() {
-
         var items = [];
-        members.orderByChild("providerId")
-            .equalTo(localStorage.token)
-            .on("child_added", (snapshot) => {
-            var item = snapshot.val();
+        if(localStorage.role === "provider")
+        {
+
+            members.orderByChild("providerId")
+                .equalTo(localStorage.token)
+                .on("child_added", (snapshot) => {
+                var item = snapshot.val();
             item['.key'] = snapshot.key;
             items.push(item);
             this.setState({
                 members: items
             });
 
-        }).bind(this);
+            }).bind(this);
+        }else if (localStorage.role === "manager") {
+
+            members.on("value", (snapshot) => {
+
+                snapshot.forEach(function(childSnapshot) {
+                    var item = childSnapshot.val();
+                    item['.key'] = childSnapshot.key;
+                    items.push(item);
+                })
+
+                this.setState({
+                    members: items
+                });
+            }).bind(this);
+
+
+}
+
+
 
     },
 

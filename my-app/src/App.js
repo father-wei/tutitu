@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import { authService } from './core/auth'
 import  LoginPage  from  './pages/login';
 import  ProviderPage  from  './pages/provider';

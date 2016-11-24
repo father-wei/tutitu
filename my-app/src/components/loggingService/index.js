@@ -34,8 +34,9 @@ var LoggingService = React.createClass({
                    services.orderByChild("code")
                         .equalTo(item.serviceId)
                         .on("value", (childsnapshot) => {
-                            item.price =  Object.values(childsnapshot.val())[0].price;
-                            item.serviceName =  Object.values(childsnapshot.val())[0].name;
+
+                            item.price =  childsnapshot.val()? Object.values(childsnapshot.val())[0].price: 0;
+                            item.serviceName =  childsnapshot.val()? Object.values(childsnapshot.val())[0].name : '';
                             if( new Date().getTime() - new Date(item.date).getTime() < 86400000 * 7 ){
                                 items.push(item);
                                 this.setState({
@@ -88,7 +89,7 @@ var LoggingService = React.createClass({
             .equalTo( e.target.value)
             .on("value", (snapshot) => {
                  if(snapshot.val()){
-                    var serviceObj = Object.values(snapshot.val())[0];
+                    var serviceObj = snapshot.val() ? Object.values(snapshot.val())[0] : {};
                     this.setState({serviceValidate: true});
                     this.setState({
                         serviceModalMessage: <ul className="list-group">
@@ -189,7 +190,9 @@ var LoggingService = React.createClass({
             this.handleSubmit()
             this.setState({
                serviceIdText: '',
-               memberIdText: ''
+               memberIdText: '',
+               serviceModalMessage: <h1>The service search result is not found</h1>,
+               memberModalMessage: <h1>The member search result is not found</h1>,
 
            });
 
