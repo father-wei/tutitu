@@ -29,7 +29,7 @@ var List = React.createClass({
 
                             { this.props.component === "members"? <th>Status</th> :  <th>Description</th>}
                             { this.props.component === "service"? <th>Price</th> :  null}
-                            {localStorage.role ==="manager"? <th>Provider Id</th> :  null}
+                            {localStorage.role ==="manager" && this.props.component !== "service"? <th>Provider Id</th> :  null}
                         </tr>
                     </thead>
                     <tbody>
