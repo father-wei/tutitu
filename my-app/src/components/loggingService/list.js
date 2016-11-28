@@ -1,4 +1,5 @@
 import React from 'react';
+import { loggingServices } from '../../core/domain/loggingServices'
 
 
 var List = React.createClass({
@@ -10,16 +11,24 @@ var List = React.createClass({
         }
     },
     componentWillMount: function() {
+        var _this = this;
+        this.getTotal();
+        loggingServices.on("value", function(){
+            _this.getTotal();
+        });
+    },
 
+
+
+    getTotal : function(){
         var sum = this.props.items
             .map(item => item.price)
-            .reduce(function(a, b) {
+        .reduce(function(a, b) {
             return a + b
         }, 0);
 
         this.setState({sum: sum});
     },
-
 
     createItem : function(item, index) {
 
