@@ -70,8 +70,10 @@ var ManagerPage =React.createClass({
 
                     </div>
                 </div>
-
+                <div className="well">
+                <h2>Weekly Report </h2>
                 <List items={ this.state.loggingServices } sum= {this.state.sum}/>
+                </div>
             </div>
         )
     }

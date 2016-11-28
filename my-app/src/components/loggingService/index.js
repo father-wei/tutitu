@@ -265,7 +265,7 @@ var LoggingService = React.createClass({
 
                         <div className="col-md-2">
                             <div className="form-group">
-                                <label className="control-label">Report </label>
+                                <label className="control-label">Weekly Report </label>
                                 <div><button onClick={this.handleReportClick} className="btn btn-default" type="button">{this.state.showLoggingTable? "Hide" : "Show" }</button></div>
                             </div>
                         </div>
